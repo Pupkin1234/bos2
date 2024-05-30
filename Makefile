@@ -1,15 +1,15 @@
-CFLAGS=-g -Wall -Wextra -pedantic
+CFLAGS=-g -Wall -Wextra
 SRCDIR=src
 
 all: $(SRCDIR)/main.o  $(SRCDIR)/liblogger.so
-	$(CXX) $(CFLAGS) $(SRCDIR)/main.o -ldl -L$(SRCDIR)/ -llogger -o startcpp.exe
+	$(CC) $(CFLAGS) $(SRCDIR)/main.o -ldl -L$(SRCDIR)/ -llogger -o startc.exe
 
-%.o: %.cpp
-	$(CXX) $(CFLAGS) -c $^ -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 $(SRCDIR)/liblogger.so:
-	$(CXX) $(CFLAGS) -shared -fPIC $(SRCDIR)/liblogger.cpp -o $@
+	$(CC) $(CFLAGS) -shared -fPIC $(SRCDIR)/liblogger.c -o $@
 
 clean:
-	rm -rf startcpp.exe
+	rm -rf startc.exe
 	rm -rf $(SRCDIR)/*.o $(SRCDIR)/*.so.* $(SRCDIR)/*.a $(SRCDIR)/*.so
